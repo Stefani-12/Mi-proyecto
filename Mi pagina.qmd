@@ -26,3 +26,35 @@ You can add options to executable code like this
 ```
 
 The `echo: false` option disables the printing of code (only output is displayed).
+
+#Analisis datos
+
+##Importar data
+
+```{r}
+library(readxl)
+data <- read_excel("LA MOLINA 2014 POTATO WUE (FB).xlsx" , sheet = 2)
+head(data)
+```
+
+#modelo lineal
+
+```{r}
+modelo <- lm(formula = lfa ~ block + geno + riego +riego*geno, data = data) 
+anova(modelo)
+```
+
+#instalar blox polt
+
+```{r}
+library (ggplot2)
+```
+
+#grafico con blox plot
+
+```{r}
+ggplot(data, aes(x = factor(geno), y = lfa, fill = factor(riego))) +
+  geom_boxplot() +
+  labs(title = "Box Plot de lfa por Genotipo", x = "Genotipo", y = "lfa") +
+  theme_minimal()
+```
